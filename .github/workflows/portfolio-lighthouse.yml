@@ -30,7 +30,6 @@ jobs:
         run: node scripts/check-lighthouse-accessible-names.mjs .lighthouseci/
       - name: Upload Lighthouse reports
         if: always()
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: portfolio-lighthouse
