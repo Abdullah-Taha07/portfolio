@@ -1,7 +1,7 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://127.0.0.1:4173/", "http://127.0.0.1:4173/en/", "http://127.0.0.1:4173/mishwar-case-study.html"],
+      "url": ["http://127.0.0.1:4173/?lang=ar", "http://127.0.0.1:4173/", "http://127.0.0.1:4173/en/", "http://127.0.0.1:4173/mishwar-case-study.html"],
       "numberOfRuns": 2,
       "settings": {"chromeFlags": "--no-sandbox --headless"}
     },
