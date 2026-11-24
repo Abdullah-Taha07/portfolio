@@ -33,7 +33,7 @@
   <link rel="apple-touch-icon" href="images/abdalla-avatar-icon-v1.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/portfolio-fsd.css">
   <script defer src="js/portfolio-fsd.js"></script>
   <script type="application/ld+json">
@@ -41,9 +41,10 @@
   </script>
 </head>
 <body>
+<div id="top" aria-hidden="true"></div>
 <a class="skip-link" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
 <div class="page-noise" aria-hidden="true"></div>
-<header class="site-header" id="top">
+<header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="#top" aria-label="Abdalla Taha — Home">
       <span class="brand-mark">AT<span class="brand-dot">.</span></span>
@@ -66,7 +67,7 @@
 <main id="main">
   <section class="hero container" aria-labelledby="hero-title">
     <div class="hero-content">
-      <p class="eyebrow"><span class="status-pulse" aria-hidden="true"></span><span data-i18n="eyebrow">الرياض · أبحث عن فرص Full-Stack وJavaScript بمستوى يناسب خبرتي</span></p>
+      <p class="eyebrow"><span class="status-pulse" aria-hidden="true"></span><span data-i18n="eyebrow">الرياض · أحوّل تحديات الأعمال إلى حلول رقمية عملية — من الفكرة إلى التنفيذ والاختبار.</span></p>
       <h1 id="hero-title"><span data-i18n="heroStart">مطور Full-Stack أبني واجهات ويب،</span><br><span class="gradient-text" data-i18n="heroHighlight">وأربطها بالخدمات وقواعد البيانات.</span></h1>
       <p class="hero-role" dir="ltr">Full-Stack Developer <span aria-hidden="true">/</span> Web · Mobile PWA · Android · Cloud</p>
       <p class="hero-description" data-i18n="heroDesc">أعمل على JavaScript والواجهات المتجاوبة وواجهات REST والخدمات السحابية. مشروعي الأبرز «مشوار» تجربة عملية تربط الراكب والكابتن والإدارة، مع تطوير واختبار بمساعدة أدوات AI ومراجعة النتائج بنفسي. المنظومة لا تزال تجريبية.</p>
@@ -110,7 +111,7 @@
       <div class="floating-chip chip-a">JavaScript <span>✦</span></div><div class="floating-chip chip-b">Cloudflare <span>◉</span></div>
     </div>
   </section>
-  <section class="tech-ticker" aria-label="Technologies used"><div class="container ticker-content" dir="ltr" tabindex="0" role="region" aria-label="ظ<span>JAVASCRIPT</span><span>NODE.JS</span><span>REST APIS</span><span>CLOUDFLARE WORKERS</span><span>D1 · SQLITE</span><span>R2</span><span>VERCEL</span><span>GIT / GITHUB</span><span>PWA</span></div></section>
+  <section class="tech-ticker" aria-label="Technologies used"><div class="container ticker-content" dir="ltr" tabindex="0" role="region" aria-label="Scrollable technology list"><span>JAVASCRIPT</span><span>NODE.JS</span><span>REST APIS</span><span>CLOUDFLARE WORKERS</span><span>D1 · SQLITE</span><span>R2</span><span>VERCEL</span><span>GIT / GITHUB</span><span>PWA</span></div></section>
   <section class="section container" id="about" aria-labelledby="about-title">
     <div class="section-heading"><span class="section-index">01 / <span data-i18n="sectionAboutSmall">نبذة</span></span><h2 id="about-title" data-i18n="aboutTitle">أفكر في المنتج كاملًا، وليس الشاشة فقط.</h2><p data-i18n="aboutLead">من تجربة الاستخدام إلى التكامل مع الخادم، أبحث عن حلول عملية قابلة للاختبار والتحسين.</p></div>
     <div class="about-layout">

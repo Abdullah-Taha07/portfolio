@@ -21,7 +21,7 @@
   const translations = {
     ar: {
       skip:'تجاوز إلى المحتوى',downloadResume:'تحميل السيرة الذاتية:',navAbout:'عني',navSkills:'التقنيات',navProjects:'المشاريع',navJourney:'الرحلة',navContact:'تواصل',
-      eyebrow:'الرياض · أبحث عن فرص Full-Stack وJavaScript بمستوى يناسب خبرتي',heroStart:'مطور Full-Stack أبني واجهات ويب،',heroHighlight:'وأربطها بالخدمات وقواعد البيانات.',heroDesc:'أعمل على JavaScript والواجهات المتجاوبة وواجهات REST والخدمات السحابية. مشروعي الأبرز «مشوار» تجربة عملية تربط الراكب والكابتن والإدارة، مع تطوير واختبار بمساعدة أدوات AI ومراجعة النتائج بنفسي. المنظومة لا تزال تجريبية.',
+      eyebrow:'الرياض · أحوّل تحديات الأعمال إلى حلول رقمية عملية — من الفكرة إلى التنفيذ والاختبار.',heroStart:'مطور Full-Stack أبني واجهات ويب،',heroHighlight:'وأربطها بالخدمات وقواعد البيانات.',heroDesc:'أعمل على JavaScript والواجهات المتجاوبة وواجهات REST والخدمات السحابية. مشروعي الأبرز «مشوار» تجربة عملية تربط الراكب والكابتن والإدارة، مع تطوير واختبار بمساعدة أدوات AI ومراجعة النتائج بنفسي. المنظومة لا تزال تجريبية.',
       seeWork:'استعرض أعمالي',contactMe:'تواصل معي',openMishwarSites:'فتح تطبيقات مشوار',whatsappMe:'واتساب',whatsappAction:'راسلني على واتساب',metricRepos:'مشروعًا في معرض الأعمال',metricApps:'تطبيقات مشوار مترابطة',metricYear:'أحدث مشروع Full-Stack',systemHeading:'من ثلاث تجارب مستخدم إلى خادم مشترك',pilotNote:'المشروع في مرحلة التطوير والاختبارات، وليس إطلاقًا تجاريًا معتمدًا.',
       sectionAboutSmall:'نبذة',aboutTitle:'أفكر في المنتج كاملًا، وليس الشاشة فقط.',aboutLead:'من تجربة الاستخدام إلى التكامل مع الخادم، أبحث عن حلول عملية قابلة للاختبار والتحسين.',name:'عبدالله طه محمد',location:'الرياض، المملكة العربية السعودية',aboutP1:'أنا مطور Full-Stack أعمل على تطبيقات ويب وجوال قابلة للتثبيت عبر PWA ومشروعات تدريبية. بدأت بـ HTML وCSS وJavaScript، وتوسعت في مشوار إلى Node.js وREST والخدمات السحابية وقواعد البيانات، مع متابعة غلاف Android Java التجريبي.',aboutP2:'في مشوار أعمل على تحويل المتطلبات إلى وظائف قابلة للتجربة، وتنظيم مهام التطوير، ومراجعة التعديلات البرمجية والتحقق من جودة الكود، وتحليل الأخطاء، والتحقق من الاختبارات والتكامل قبل اعتماد التغييرات. لا أقدّم النموذج التجريبي على أنه منتج أُطلق تجاريًا.',aboutPoint1Title:'منظور شامل',aboutPoint1:'واجهة + API + قاعدة بيانات + نشر',aboutPoint2Title:'تحليل الأعطال',aboutPoint2:'تشخيص المشكلات ومراجعة نتائج الاختبارات',aboutPoint3Title:'تعلم وتطوير مستمر',aboutPoint3:'من مشاريع تدريبية إلى منظومة أكثر تعقيدًا',
       sectionSkillsSmall:'التقنيات',skillsTitle:'المهارات التي أستخدمها في التطوير.',skillsLead:'تقنيات مثبتة بمشاريعي، مصنفة حسب وظيفتها؛ دون ادعاء استخدام أدوات غير موجودة في أعمالي.',skillsFrontDesc:'تصميم وتطوير واجهات متجاوبة، ديناميكية، عربية وإنجليزية.',skillsBackDesc:'ربط الخدمات والتحقق من الهوية والطلبات والعمليات الحساسة.',skillsDataDesc:'العمل مع البيانات العلائقية والتخزين السحابي والترحيلات.',skillsCloudDesc:'إعداد وربط ونشر تطبيقات ويب على بنية سحابية.',skillsQualityDesc:'إدارة الإصدارات واكتشاف الأخطاء واختبار السلوك.',skillsAiDesc:'تحليل المتطلبات وتوجيه أدوات البرمجة المساعدة ومراجعة النتائج.',
@@ -33,7 +33,7 @@
     },
     en: {
       skip:'Skip to content',downloadResume:'Download resume:',navAbout:'About',navSkills:'Tech stack',navProjects:'Projects',navJourney:'Journey',navContact:'Contact',
-      eyebrow:'Riyadh · Open to JavaScript / Full-Stack opportunities aligned with my experience',heroStart:'I build web interfaces,',heroHighlight:'and connect the APIs and data behind them.',heroDesc:'I work with JavaScript, responsive web interfaces, REST APIs and cloud services. My flagship Mishwar pilot connects rider, captain and admin applications. I coordinate AI-assisted development, review changes and verify test results; it is not a commercial launch.',
+      eyebrow:'Riyadh · Turning business challenges into practical digital solutions — from idea to implementation and testing.',heroStart:'I build web interfaces,',heroHighlight:'and connect the APIs and data behind them.',heroDesc:'I work with JavaScript, responsive web interfaces, REST APIs and cloud services. My flagship Mishwar pilot connects rider, captain and admin applications. I coordinate AI-assisted development, review changes and verify test results; it is not a commercial launch.',
       seeWork:'Explore my work',contactMe:'Get in touch',openMishwarSites:'Choose Mishwar app',whatsappMe:'WhatsApp',whatsappAction:'Chat on WhatsApp',metricRepos:'portfolio projects',metricApps:'Mishwar web apps',metricYear:'latest full-stack project',systemHeading:'Three experiences. One shared backend.',pilotNote:'This project is a development pilot, not an approved commercial launch.',
       sectionAboutSmall:'About',aboutTitle:'I look beyond the screen to the full product.',aboutLead:'From user experience to backend integration, I focus on practical, testable improvements.',name:'Abdalla Taha Mohamed',location:'Riyadh, Saudi Arabia',aboutP1:'I work on web and installable mobile PWA experiences and training projects. Starting with HTML, CSS and JavaScript, I expanded in Mishwar to Node.js, REST APIs, cloud services, databases and an experimental Java Android wrapper.',aboutP2:'On Mishwar, I translate requirements into testable functionality, prioritize development tasks, review code changes and validate their quality, investigate bugs, and validate integration and tests before acceptance. I do not present this pilot as a commercially launched product.',aboutPoint1Title:'End-to-end thinking',aboutPoint1:'Frontend + API + database + deployment',aboutPoint2Title:'Troubleshooting',aboutPoint2:'Investigating root causes and regression results',aboutPoint3Title:'Continuous growth',aboutPoint3:'From training projects to multi-app systems',
       sectionSkillsSmall:'Tech stack',skillsTitle:'Tools and technologies I use.',skillsLead:'Technologies evidenced by projects, grouped by function — without claiming unsupported experience.',skillsFrontDesc:'Responsive, dynamic interfaces in both Arabic and English.',skillsBackDesc:'Service integration, user identities, requests, and permissions.',skillsDataDesc:'Relational data, cloud object storage, and migrations.',skillsCloudDesc:'Deploying and connecting web applications on cloud platforms.',skillsQualityDesc:'Versioning, troubleshooting, testing and release checks.',skillsAiDesc:'Requirements analysis, guiding coding assistants and reviewing outputs.',
@@ -47,7 +47,9 @@
   const root = document.documentElement;
   const getStored = key => { try { return localStorage.getItem(key); } catch { return null; } };
   const setStored = (key, val) => { try { localStorage.setItem(key, val); } catch {} };
-  let lang = getStored('at-portfolio-lang') === 'en' ? 'en' : 'ar';
+  const storedLang = getStored('at-portfolio-lang');
+  const deviceLocale = String((navigator.languages && navigator.languages[0]) || navigator.language || 'ar').trim();
+  let lang = storedLang === 'ar' || storedLang === 'en' ? storedLang : (/^ar(?:[-_]|$)/i.test(deviceLocale) ? 'ar' : 'en');
   let theme = getStored('at-portfolio-theme') === 'light' ? 'light' : 'dark';
   let category = 'all';
   const byId = id => document.getElementById(id);
@@ -129,7 +131,7 @@
     root.dataset.theme=theme;
     byId('theme-icon').textContent=theme === 'dark' ? '☀' : '☾';
     themeToggle.setAttribute('aria-label',lang==='ar'?'تغيير لون الموقع':'Switch color theme');
-    document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#0b1220':'#f7f9fc';
+    document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#0b1220':'#e7f1f5';
   }
   filterButtons.forEach(button=>button.addEventListener('click',()=>{
     category=button.dataset.filter;
@@ -161,9 +163,12 @@
   const backToTop = byId('back-to-top');
   const updateBackToTop = () => { backToTop.hidden = window.scrollY < 400; };
   window.addEventListener('scroll', updateBackToTop, {passive: true});
-  backToTop.addEventListener('click', () => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({top: 0, behavior: reduceMotion ? 'auto' : 'smooth'});
+  backToTop.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (window.location.hash && /^https?:$/.test(window.location.protocol)) {
+      window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo({top: 0, left: 0, behavior: 'instant'});
   });
   byId('current-year').textContent=String(new Date().getFullYear());
   applyLanguage();applyTheme();
