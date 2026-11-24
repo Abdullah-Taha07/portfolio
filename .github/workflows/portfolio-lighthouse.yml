@@ -25,7 +25,11 @@ jobs:
       - name: Summarize measured Lighthouse scores (report only)
         if: always()
         run: node scripts/summarize-lighthouse.mjs .lighthouseci/
+      - name: Fail on measured accessible-name mismatches
+        if: always()
+        run: node scripts/check-lighthouse-accessible-names.mjs .lighthouseci/
       - name: Upload Lighthouse reports
+        if: always()
         if: always()
         uses: actions/upload-artifact@v4
         with:
