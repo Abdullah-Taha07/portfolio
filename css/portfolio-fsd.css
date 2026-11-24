@@ -99,3 +99,6 @@ html{overflow-x:clip}
 
 /* V8: safe tour and recruiting CTA */
 .safe-tour-link{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:800;font-size:.85rem}.safe-tour-link:hover,.safe-tour-link:focus-visible{border-color:var(--accent);background:var(--chip)}.tour-promo{border:1px solid #377d84;border-radius:19px;padding:26px 30px;background:linear-gradient(115deg,#123d4860,var(--surface));display:flex;align-items:center;justify-content:space-between;gap:20px;margin-block:26px}.tour-promo h3{margin:12px 0;font-size:1.35rem}.tour-promo p{color:var(--muted);line-height:1.8;max-width:700px}.tour-promo>a{white-space:nowrap}.featured-proof-item .safe-tour-link{margin-inline-start:10px;margin-block-start:10px}@media(max-width:780px){.tour-promo{flex-direction:column;align-items:stretch;padding:18px}.tour-promo>a{width:100%;justify-content:center}}
+/* Accessible footer tap targets: comfortably keyboard and touch actionable. */
+.site-footer .footer-inner a{display:inline-flex;min-height:36px;align-items:center;justify-content:center;padding:5px 8px;text-decoration:underline;text-underline-offset:3px}
+.ticker-content:focus-visible{outline:3px solid var(--accent);outline-offset:-3px;border-radius:5px}

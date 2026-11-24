@@ -43,6 +43,8 @@ jobs:
           python -m playwright install --with-deps chromium
           npm install --no-save --no-package-lock --no-audit --ignore-scripts axe-core@4.10.3
       - name: Test real Chromium interactions and axe WCAG violations
+        env:
+          STRICT_AXE: "1"
         run: python tests/browser_quality.py --axe-required
       - name: Upload browser and axe report
         if: always()
