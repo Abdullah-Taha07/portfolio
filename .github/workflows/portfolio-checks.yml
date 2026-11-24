@@ -25,7 +25,7 @@ jobs:
       - name: Run offline source contract tests
         run: node --test tests/*.test.mjs
   browser-accessibility:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
