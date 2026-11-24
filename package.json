@@ -1,0 +1,7 @@
+{
+  "name":"abdalla-portfolio-quality",
+  "private":true,
+  "type":"module",
+  "engines":{"node":">=22"},
+  "scripts":{"test":"node --test tests/*.test.mjs","syntax":"node --check js/portfolio-fsd.js && node --check js/mishwar-case-study.js && node --check demo/tour.js"}
+}

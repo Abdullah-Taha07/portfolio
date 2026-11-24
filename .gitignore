@@ -1,0 +1,6 @@
+node_modules/
+.lighthouseci/
+quality-browser-report.json
+.venv/
+__pycache__/
+*.pyc
