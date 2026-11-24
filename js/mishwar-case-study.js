@@ -13,7 +13,7 @@
     views.forEach(view => { view.hidden = view.dataset.lang !== language; });
     inline.forEach(el => { el.textContent = el.dataset[language]; });
     toggle.textContent = language === 'ar' ? 'EN' : 'عربي';
-    toggle.setAttribute('aria-label',language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
+    toggle.setAttribute('aria-label',language === 'ar' ? 'EN — switch to English' : 'عربي — التبديل إلى العربية');
     document.title = language === 'ar' ? 'مشوار — دراسة حالة Full-Stack وتطبيقات جوال | Abdalla Taha' : 'Mishwar — Full-Stack and Mobile PWA Case Study | Abdalla Taha';
   }
   toggle.addEventListener('click',() => {language = language === 'ar' ? 'en' : 'ar';try{localStorage.setItem('at-portfolio-lang',language);}catch{}applyLanguage();});

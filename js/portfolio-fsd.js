@@ -125,7 +125,7 @@
     document.querySelectorAll('[data-i18n]').forEach(node=>{ const k=node.getAttribute('data-i18n'); const translated=translations[lang][k]; if(translated != null && node.textContent !== translated) node.textContent=translated; });
     document.querySelectorAll('[data-placeholder]').forEach(node=>{const k=node.getAttribute('data-placeholder');if(translations[lang][k])node.placeholder=translations[lang][k];});
     langToggle.textContent=lang === 'ar' ? 'EN' : 'عربي';
-    langToggle.setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل إلى العربية');
+    langToggle.setAttribute('aria-label',lang==='ar'?'EN — switch to English':'عربي — التبديل إلى العربية');
     byId('menu-toggle').setAttribute('aria-label',lang==='ar'?'فتح القائمة':'Open menu');
     backToTop.setAttribute('aria-label', translations[lang].backToTop);
     backToTop.title = translations[lang].backToTop;
@@ -148,7 +148,15 @@
     renderProjects();
   }));
   searchInput.addEventListener('input',renderProjects);
-  langToggle.addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';setStored('at-portfolio-lang',lang);applyLanguage();applyTheme();});
+  langToggle.addEventListener('click',()=>{
+    lang='en';
+    setStored('at-portfolio-lang',lang);
+    const target=new URL('en/',window.location.href);
+    target.search=window.location.search;
+    target.searchParams.delete('lang');
+    target.hash=window.location.hash;
+    window.location.assign(target.href);
+  });
   themeToggle.addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';setStored('at-portfolio-theme',theme);applyTheme();});
   const menuToggle = byId('menu-toggle');
   const nav = byId('primary-nav');
@@ -186,7 +194,7 @@
       if (!entries.some(entry => entry.isIntersecting)) return;
       if (!galleryEnhanced) renderProjects();
       galleryObserver.disconnect();
-    }, {rootMargin:'280px 0px'});
+    }, {rootMargin:'0px 0px'});
     galleryObserver.observe(projectGrid);
   } else {
     window.addEventListener('load', () => { if (!galleryEnhanced) renderProjects(); }, {once:true});

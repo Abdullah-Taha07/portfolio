@@ -73,7 +73,7 @@ def assert_mobile_photo_layout(page, width, locale):
 try:
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True,executable_path=os.environ.get('PORTFOLIO_BROWSER_PATH') or None,args=['--no-sandbox','--disable-dev-shm-usage'])
-  for width in [320,360,390,1366]:
+  for width in [320,360,390,768,1024,1366]:
    print('CHECK',width,flush=True)
    page,context,data=pagecheck(browser,'/',width,axe=True)
    assert page.locator('#project-grid .project-card').count()==15, 'Arabic dynamic gallery not 15'
@@ -88,7 +88,11 @@ try:
    chooser.click()
    assert page.locator('.mishwar-chooser-card[open] .mishwar-site-options a').count()==3,'Mishwar chooser broken'
    page.locator('#lang-toggle').click()
-   assert page.locator('html').get_attribute('lang')=='en','Language switching broken'
+   page.wait_for_url('**/en/*')
+   assert page.locator('html').get_attribute('lang')=='en','English page navigation broken'
+   assert 'شاهد الفكرة بدون حسابات حقيقية' not in page.locator('body').inner_text(),'Arabic-only content remains on English page'
+   page.goto(base+'/?lang=ar',wait_until='domcontentloaded',timeout=12000)
+   assert page.locator('html').get_attribute('lang')=='ar','Return to explicit Arabic failed'
    page.evaluate("window.location.hash = '#contact'")
    page.wait_for_timeout(180)
    up=page.locator('#back-to-top')
@@ -147,7 +151,7 @@ try:
   assert page.evaluate('window.scrollY')<12,'English Back to top did not reach document start'
   ctx.close()
   # English no-JS fallback is verified by source tests; sandbox no-JS Chromium navigation can stall.
-  for en_width in [320,360]:
+  for en_width in [320,360,768,1024]:
    page,ctx,_=pagecheck(browser,'/en/',en_width,axe=True)
    assert_mobile_photo_layout(page,en_width,'en')
    ctx.close()

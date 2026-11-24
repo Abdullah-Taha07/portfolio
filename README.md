@@ -60,3 +60,12 @@ Create a feature branch from reviewed `main`, run tests and open a pull request.
 - Observed 24 Nov 2026 local PR Lighthouse report: Arabic performance 96–100, English 98–100, Mishwar case study 100; Accessibility, Best Practices and SEO were 100 in sampled runs. These are not live-production scores. See `docs/PORTFOLIO_HIRING_QA_20261124_AR.md`.
 - Final CV cross-check: the Arabic and English PDF resumes describe Mishwar as a pilot and disclose Codex use. The PDFs were not modified in this pass.
 - Release workflow: branch → tests → Pull Request → manual merge. No automated push, merge or deployment is performed by this patch.
+## November 24 remediation: internationalization, accessibility and live acceptance
+- Arabic **EN** now navigates to the independent `/en/` page (preserving the hash and non-language query parameters); English **العربية** links to `/?lang=ar`. No partially translated in-place view.
+- English project directory offers the same search and category filters as the Arabic directory, progressively enhanced: all 15 static project cards remain visible with JavaScript disabled.
+- Visible brand, phone and language controls no longer have conflicting accessible names. Lighthouse CI fails on accessible-name mismatch audits, and the accessibility, best-practices and SEO category thresholds are strict.
+- Performance retains a **reported** 99% aspiration: historical simulated mobile Lighthouse measurements ranged **88–100** (2026-11-24 PR run 45480717129). Performance is not claimed as guaranteed because lab CPU jitter caused a 451 ms blocking event in one run; validate live mobile Web Vitals before stricter gating.
+- Run `npm run audit:live` to verify publicly deployed *portfolio-owned* pages/assets/PDFs after merging and deployment. Run `npm run audit:external` for diagnostic external links; auth-protected apps still require human acceptance.
+- GitHub Pages publishes this repository under `/portfolio/`; `robots.txt` inside that path **does not** control the domain-root robots policy. The sitemap remains `https://abdullah-taha07.github.io/portfolio/sitemap.xml` and can be submitted to search engines.
+- `fonts/Cairo-SemiBold.ttf` was an unused legacy asset; it is removed by the repair process. Production pages request Google Fonts and use system-font fallbacks.
+- These changes do not certify real service logins, iOS/Safari behavior, live uptime or perfect Lighthouse scores. CI and the post-deploy acceptance checks are separate.

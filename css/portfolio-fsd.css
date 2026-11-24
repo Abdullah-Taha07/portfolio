@@ -155,3 +155,7 @@ html[data-theme=light] .back-to-top,
 html[data-theme=light] .skip-link {
   color: #fff;
 }
+
+/* English gallery progressive enhancement and keyboard-accessible filters. */
+.project-toolbar[hidden],.project-grid>.project-card[hidden],.project-grid>.project-group-heading[hidden],#no-projects-en[hidden]{display:none!important}
+.filter-button:focus-visible,.search-wrap:focus-within{outline:3px solid var(--accent2);outline-offset:3px}
