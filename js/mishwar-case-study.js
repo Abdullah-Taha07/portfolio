@@ -5,7 +5,8 @@
   const views = document.querySelectorAll('[data-lang]');
   const inline = document.querySelectorAll('[data-ar][data-en]');
   const stored = (() => { try { return localStorage.getItem('at-portfolio-lang'); } catch { return null; } })();
-  let language = stored === 'en' ? 'en' : 'ar';
+  const queryLanguage = new URLSearchParams(window.location.search).get('lang');
+  let language = queryLanguage === 'en' ? 'en' : queryLanguage === 'ar' ? 'ar' : stored === 'en' ? 'en' : 'ar';
   function applyLanguage(){
     html.lang = language;
     html.dir = language === 'ar' ? 'rtl' : 'ltr';
