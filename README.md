@@ -51,3 +51,12 @@ Create a feature branch from reviewed `main`, run tests and open a pull request.
 - `portfolio-lighthouse.yml` reports Lighthouse metrics from a local static server during PRs or manual runs. The thresholds are warnings, not claims of a passed 99 score.
 - Real public Coffee and E-commerce screenshot utility: `scripts/CAPTURE_REAL_PUBLIC_PREVIEWS.ps1`, optional and never automatically executed.
 - Source fonts are loaded from Google Fonts with a system-font fallback. No licensed font files are distributed in the bundle.
+
+## Final hiring quality pass (after V8, no project screenshots)
+- Added a bilingual **role and proof** section in the Mishwar engineering case study. It separates personal contribution (requirements, coordination, review and verification) from code generated with AI assistance and does not imply independent coding ability was already tested.
+- Added `scripts/audit-site-links.mjs`, `scripts/audit-external-links.mjs` and `tests/portfolio-hiring-final.test.mjs`: validate repository-local assets, page anchors, resumes and expected contact/app URLs without making external network claims. These tests run in existing GitHub Actions.
+- Added `scripts/summarize-lighthouse.mjs`: report **measured** scores per local URL/run, rather than inferring 99 or 100 from a green workflow. PR Lighthouse reports remain informational, with existing warning-only thresholds.
+- External demo URLs require manual verification in a real browser. Optional: `node scripts/audit-external-links.mjs` probes public URLs on your own machine without logging in, but 403s/redirects are inconclusive. Passing CI does not confirm login flows, external service availability or production performance.
+- Observed 24 Nov 2026 local PR Lighthouse report: Arabic performance 96–100, English 98–100, Mishwar case study 100; Accessibility, Best Practices and SEO were 100 in sampled runs. These are not live-production scores. See `docs/PORTFOLIO_HIRING_QA_20261124_AR.md`.
+- Final CV cross-check: the Arabic and English PDF resumes describe Mishwar as a pilot and disclose Codex use. The PDFs were not modified in this pass.
+- Release workflow: branch → tests → Pull Request → manual merge. No automated push, merge or deployment is performed by this patch.
