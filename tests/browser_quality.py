@@ -78,6 +78,9 @@ try:
    page,context,data=pagecheck(browser,'/',width,axe=True)
    assert page.locator('#project-grid .project-card').count()==15, 'Arabic dynamic gallery not 15'
    if width <= 390:assert_mobile_photo_layout(page,width,'ar')
+   page.locator('#project-search').fill('مشوار')
+   assert page.locator('#project-grid .project-card').count()==1,'Arabic Mishwar search broken'
+   page.locator('#project-search').fill('')
    page.locator('#project-search').fill('Coffee')
    assert page.locator('#project-grid .project-card').count()==1,'Project search broken'
    page.locator('#project-search').fill('')
