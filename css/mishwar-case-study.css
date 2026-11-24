@@ -10,3 +10,6 @@
 .decision-card p strong{color:var(--ink)}.decision-card a{color:var(--accent);font-weight:800;font-size:.83rem;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:900px){.decision-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:650px){.decision-grid{grid-template-columns:1fr}}
+/* Links within prose are not identified by color alone. */
+.case-footer a,.case-section p a{text-decoration:underline;text-underline-offset:3px}
+.case-footer a{display:inline-flex;min-height:36px;align-items:center;padding:5px 8px}
