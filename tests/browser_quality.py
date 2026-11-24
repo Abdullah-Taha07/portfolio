@@ -21,7 +21,7 @@ if require_axe and not axe_path.exists():
     print('AXE_REQUIRED_BUT_NOT_INSTALLED');sys.exit(2)
 
 def pagecheck(browser,route,width=1366,height=840,enabled=True,axe=False):
-    context=browser.new_context(viewport={'width':width,'height':height},java_script_enabled=enabled,reduced_motion='reduce')
+    context=browser.new_context(viewport={'width':width,'height':height},java_script_enabled=enabled,reduced_motion='reduce',locale='ar-SA')
     context.route('**/*',lambda r: r.continue_() if r.request.url.startswith(base) else r.abort())
     page=context.new_page();page.set_default_timeout(4500);errors=[]
     page.on('pageerror',lambda e:errors.append(str(e)))
@@ -103,9 +103,32 @@ try:
    assert page.evaluate('window.scrollY')<12,'Arabic footer Back to top did not reach document start'
    context.close()
   # Static no-JS contract is checked by node --test; Chromium no-JS causes a sandbox navigation stall in this container.
+  # Device locale and saved choice are checked in a real browser, not only in source tests.
+  for device_locale, expected in [('ar-SA','ar'),('en-US','en'),('fr-FR','en')]:
+   language_ctx=browser.new_context(locale=device_locale,viewport={'width':390,'height':840})
+   language_ctx.route('**/*',lambda r: r.continue_() if r.request.url.startswith(base) else r.abort())
+   language_page=language_ctx.new_page()
+   language_page.goto(base+'/',wait_until='domcontentloaded',timeout=12000)
+   assert language_page.locator('html').get_attribute('lang')==expected,(device_locale,'default language')
+   assert language_page.locator('html').get_attribute('data-theme')=='dark',(device_locale,'default theme')
+   language_ctx.close()
+  pref_ctx=browser.new_context(locale='en-US',viewport={'width':390,'height':840})
+  pref_ctx.route('**/*',lambda r: r.continue_() if r.request.url.startswith(base) else r.abort())
+  pref_ctx.add_init_script("if(location.protocol.startsWith('http')){localStorage.setItem('at-portfolio-lang','ar');localStorage.setItem('at-portfolio-theme','light');}")
+  pref_page=pref_ctx.new_page()
+  pref_page.goto(base+'/',wait_until='domcontentloaded',timeout=12000)
+  assert pref_page.locator('html').get_attribute('lang')=='ar','Manual locale preference ignored'
+  assert pref_page.locator('html').get_attribute('data-theme')=='light','Manual light theme ignored'
+  pref_ctx.close()
   print('CHECK EN',flush=True)
   page,ctx,data=pagecheck(browser,'/en/',390,axe=True)
   assert page.locator('.project-card').count()>=15,'English gallery incomplete'
+  assert page.locator('html').get_attribute('data-theme')=='dark','English page did not default to dark'
+  theme_button=page.locator('#theme-toggle-en')
+  theme_button.click()
+  assert page.locator('html').get_attribute('data-theme')=='light','English light theme toggle failed'
+  theme_button.click()
+  assert page.locator('html').get_attribute('data-theme')=='dark','English dark theme toggle failed'
   assert_mobile_photo_layout(page,390,'en')
   toggle=page.locator('#menu-toggle')
   assert toggle.is_visible(), 'English mobile navigation toggle missing'

@@ -47,7 +47,9 @@
   const root = document.documentElement;
   const getStored = key => { try { return localStorage.getItem(key); } catch { return null; } };
   const setStored = (key, val) => { try { localStorage.setItem(key, val); } catch {} };
-  let lang = getStored('at-portfolio-lang') === 'en' ? 'en' : 'ar';
+  const storedLang = getStored('at-portfolio-lang');
+  const deviceLocale = String((navigator.languages && navigator.languages[0]) || navigator.language || 'ar').trim();
+  let lang = storedLang === 'ar' || storedLang === 'en' ? storedLang : (/^ar(?:[-_]|$)/i.test(deviceLocale) ? 'ar' : 'en');
   let theme = getStored('at-portfolio-theme') === 'light' ? 'light' : 'dark';
   let category = 'all';
   const byId = id => document.getElementById(id);
@@ -129,7 +131,7 @@
     root.dataset.theme=theme;
     byId('theme-icon').textContent=theme === 'dark' ? '☀' : '☾';
     themeToggle.setAttribute('aria-label',lang==='ar'?'تغيير لون الموقع':'Switch color theme');
-    document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#0b1220':'#f7f9fc';
+    document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#0b1220':'#e7f1f5';
   }
   filterButtons.forEach(button=>button.addEventListener('click',()=>{
     category=button.dataset.filter;
