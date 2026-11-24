@@ -36,13 +36,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=optional" rel="stylesheet" media="print" onload="this.media='all'"/><noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=optional" rel="stylesheet"/></noscript>
 <link href="../css/portfolio-fsd.css" rel="stylesheet"/>
 <style>
-@media(max-width:800px){.nav-links{display:flex!important;position:static!important;flex-wrap:wrap!important;gap:10px!important;opacity:1!important;visibility:visible!important;max-height:none!important}.header-inner{flex-wrap:wrap;justify-content:space-between;padding-block:10px}.header-actions{display:flex}.nav-links a{font-size:.79rem!important}.project-card{min-width:0}}
-@media(max-width:650px){.header-inner{gap:8px}.nav-links{width:100%;order:3}.hero-contact-picker{display:block}.hero-actions{align-items:stretch}.hero-actions>a{justify-content:center}}
-</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Abdalla Taha Mohamed", "jobTitle": "JavaScript Full-Stack & Mobile PWA Developer", "url": "https://abdullah-taha07.github.io/portfolio/en/", "sameAs": ["https://github.com/Abdullah-Taha07", "https://www.linkedin.com/in/abdalla-mohamed07/"]}</script></head>
+/* Mobile nav is visible by default for visitors with JavaScript disabled. */
+@media(max-width:800px){
+  .header-inner{position:relative;height:auto;min-height:68px;flex-wrap:wrap;justify-content:space-between;padding-block:10px}
+  .header-actions{display:flex}
+  .nav-links{display:flex;position:static;width:100%;order:3;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px;padding:0;border:0;box-shadow:none;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+  .nav-links a{font-size:.79rem;min-height:44px;display:inline-flex;align-items:center;padding:8px}
+  .project-card{min-width:0}
+  html.en-nav-ready .header-inner{flex-wrap:nowrap}
+  html.en-nav-ready .menu-toggle{display:grid}
+  html.en-nav-ready .nav-links{position:absolute;top:100%;left:0;right:0;z-index:100;width:100%;order:unset;flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:3px;padding:14px 16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:var(--shadow);visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .15s ease,transform .15s ease}
+  html.en-nav-ready .nav-links.is-open{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+  html.en-nav-ready .nav-links a{width:100%;min-height:44px;display:flex;align-items:center;padding:10px}
+}
+@media(max-width:650px){
+  .header-inner{gap:8px}
+  .hero-contact-picker{display:block}
+  .hero-actions{align-items:stretch}
+  .hero-actions>a{justify-content:center}
+}
+</style><script defer src="../js/portfolio-nav-en.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Abdalla Taha Mohamed", "jobTitle": "JavaScript Full-Stack & Mobile PWA Developer", "url": "https://abdullah-taha07.github.io/portfolio/en/", "sameAs": ["https://github.com/Abdullah-Taha07", "https://www.linkedin.com/in/abdalla-mohamed07/"]}</script></head>
 <body>
+<div id="top" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <div aria-hidden="true" class="page-noise"></div>
-<header class="site-header" id="top">
+<header class="site-header">
 <div class="container header-inner">
 <a aria-label="Abdalla Taha — Home" class="brand" href="#top">
 <span class="brand-mark">AT<span class="brand-dot">.</span></span>
@@ -57,13 +76,14 @@
 </nav>
 <div class="header-actions">
 <a class="lang-button" href="../" lang="ar">العربية</a>
+<button id="menu-toggle" class="icon-button menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation menu"><span aria-hidden="true">☰</span></button>
 </div>
 </div>
 </header>
 <main id="main">
 <section aria-labelledby="hero-title" class="hero container">
 <div class="hero-content">
-<p class="eyebrow"><span aria-hidden="true" class="status-pulse"></span><span>Riyadh · Open to JavaScript / Full-Stack opportunities aligned with my experience</span></p>
+<p class="eyebrow"><span aria-hidden="true" class="status-pulse"></span><span>Riyadh · Turning business challenges into practical digital solutions — from idea to implementation and testing.</span></p>
 <h1 id="hero-title"><span>I build web interfaces,</span><br/><span class="gradient-text">and connect the APIs and data behind them.</span></h1>
 <p class="hero-role" dir="ltr">Full-Stack Developer <span aria-hidden="true">/</span> Web · Mobile PWA · Android · Cloud</p>
 <p class="hero-description">I work with JavaScript, responsive web interfaces, REST APIs and cloud services. My flagship Mishwar pilot connects rider, captain and admin applications. I coordinate AI-assisted development, review changes and verify test results; it is not a commercial launch.</p>

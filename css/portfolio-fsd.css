@@ -102,3 +102,27 @@ html{overflow-x:clip}
 /* Accessible footer tap targets: comfortably keyboard and touch actionable. */
 .site-footer .footer-inner a{display:inline-flex;min-height:36px;align-items:center;justify-content:center;padding:5px 8px;text-decoration:underline;text-underline-offset:3px}
 .ticker-content:focus-visible{outline:3px solid var(--accent);outline-offset:-3px;border-radius:5px}
+
+/* Mobile image/text containment: preserve layout without masking overflow globally. */
+@media (max-width: 900px) {
+  .hero, .about-layout { grid-template-columns: minmax(0, 1fr); }
+  .hero-content, .hero-visual, .about-layout > *, .profile-card,
+  .profile-image-wrap, .profile-card-foot, .about-copy,
+  .featured-proof, .featured-architecture { min-width: 0; max-width: 100%; }
+  .profile-card { width: 100%; }
+  .profile-image-wrap { width: 100%; overflow: hidden; }
+  .profile-image-wrap img { max-width: 100%; }
+}
+@media (max-width: 670px) {
+  .hero, .about-layout { gap: 24px; }
+  .hero-visual .system-window { transform: none; }
+  .profile-card-foot { flex-wrap: wrap; gap: 10px; padding: 16px; }
+  .profile-card-foot > div { flex: 1 1 148px; min-width: 0; }
+  .profile-card-foot strong, .profile-card-foot span,
+  .about-copy, .about-copy p, .featured-architecture figcaption {
+    overflow-wrap: anywhere;
+  }
+  .profile-image-wrap { height: clamp(220px, 80vw, 320px); }
+  .featured-architecture { margin-inline: 0; }
+  .featured-architecture img { width: 100%; max-width: 100%; height: auto; }
+}

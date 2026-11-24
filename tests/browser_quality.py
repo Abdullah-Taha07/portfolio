@@ -39,7 +39,7 @@ def pagecheck(browser,route,width=1366,height=840,enabled=True,axe=False):
         if route=='/demo/mishwar-tour.html':
             page.add_style_tag(content=(ROOT/'demo/tour.css').read_text('utf8'))
         if enabled:
-            script={'/':'js/portfolio-fsd.js','/mishwar-case-study.html':'js/mishwar-case-study.js','/demo/mishwar-tour.html':'demo/tour.js'}.get(route)
+            script={'/':'js/portfolio-fsd.js','/mishwar-case-study.html':'js/mishwar-case-study.js','/demo/mishwar-tour.html':'demo/tour.js','/en/':'js/portfolio-nav-en.js'}.get(route)
             if script:page.add_script_tag(content=(ROOT/script).read_text('utf8'))
     else:
         res=page.goto(base+route,wait_until='domcontentloaded',timeout=12000)
@@ -58,13 +58,26 @@ def pagecheck(browser,route,width=1366,height=840,enabled=True,axe=False):
         if os.environ.get('STRICT_AXE')=='1' and any(v['impact']=='serious' for v in found):problems.append({'page':route,'axe_serious':found})
     report.append(data);return page,context,data
 
+def assert_mobile_photo_layout(page, width, locale):
+    issues=page.evaluate('''() => {
+      const names=['#about','.about-layout','.profile-card','.profile-image-wrap',
+                   '.profile-card-foot','.about-copy','.featured-architecture',
+                   '.hero-visual','.system-window'];
+      return names.map(name=>{
+        const el=document.querySelector(name);if(!el)return null;
+        const r=el.getBoundingClientRect();
+        return {name,left:r.left,right:r.right,width:r.width,viewport:innerWidth};
+      }).filter(x=>x && (x.left < -1 || x.right > innerWidth+1));
+    }''')
+    assert not issues, f'{locale} mobile visual/text escapes viewport at {width}px: {issues}'
 try:
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True,executable_path=os.environ.get('PORTFOLIO_BROWSER_PATH') or None,args=['--no-sandbox','--disable-dev-shm-usage'])
-  for width in [390,1366]:
+  for width in [320,360,390,1366]:
    print('CHECK',width,flush=True)
    page,context,data=pagecheck(browser,'/',width,axe=True)
    assert page.locator('#project-grid .project-card').count()==15, 'Arabic dynamic gallery not 15'
+   if width <= 390:assert_mobile_photo_layout(page,width,'ar')
    page.locator('#project-search').fill('Coffee')
    assert page.locator('#project-grid .project-card').count()==1,'Project search broken'
    page.locator('#project-search').fill('')
@@ -76,11 +89,45 @@ try:
    assert page.locator('.mishwar-chooser-card[open] .mishwar-site-options a').count()==3,'Mishwar chooser broken'
    page.locator('#lang-toggle').click()
    assert page.locator('html').get_attribute('lang')=='en','Language switching broken'
+   page.evaluate("window.location.hash = '#contact'")
+   page.wait_for_timeout(180)
+   up=page.locator('#back-to-top')
+   assert up.is_visible(), 'Floating back to top should appear after scrolling'
+   up.click()
+   page.wait_for_timeout(140)
+   assert page.evaluate('window.scrollY')<12,'Floating Back to top did not reach document start'
+   if page.evaluate("/^https?:$/.test(location.protocol)"):
+    assert page.evaluate('window.location.hash')=='','Floating Back to top left stale anchor'
+   page.locator('.site-footer a[href="#top"]').click()
+   page.wait_for_timeout(140)
+   assert page.evaluate('window.scrollY')<12,'Arabic footer Back to top did not reach document start'
    context.close()
   # Static no-JS contract is checked by node --test; Chromium no-JS causes a sandbox navigation stall in this container.
   print('CHECK EN',flush=True)
   page,ctx,data=pagecheck(browser,'/en/',390,axe=True)
-  assert page.locator('.project-card').count()>=15,'English gallery incomplete';ctx.close()
+  assert page.locator('.project-card').count()>=15,'English gallery incomplete'
+  assert_mobile_photo_layout(page,390,'en')
+  toggle=page.locator('#menu-toggle')
+  assert toggle.is_visible(), 'English mobile navigation toggle missing'
+  toggle.click()
+  assert toggle.get_attribute('aria-expanded')=='true','English menu did not open'
+  toggle.click()
+  assert toggle.get_attribute('aria-expanded')=='false','English menu did not close'
+  toggle.click()
+  page.keyboard.press('Escape')
+  assert toggle.get_attribute('aria-expanded')=='false','English menu did not close on Escape'
+  toggle.click()
+  page.locator('#primary-nav a[href="#about"]').click()
+  assert toggle.get_attribute('aria-expanded')=='false','English menu did not close after navigating'
+  page.locator('.site-footer a[href="#top"]').click()
+  page.wait_for_timeout(140)
+  assert page.evaluate('window.scrollY')<12,'English Back to top did not reach document start'
+  ctx.close()
+  # English no-JS fallback is verified by source tests; sandbox no-JS Chromium navigation can stall.
+  for en_width in [320,360]:
+   page,ctx,_=pagecheck(browser,'/en/',en_width,axe=True)
+   assert_mobile_photo_layout(page,en_width,'en')
+   ctx.close()
   print('CHECK CASE',flush=True)
   page,ctx,data=pagecheck(browser,'/mishwar-case-study.html',390,axe=True)
   assert page.locator('#verified-pull-requests').is_visible(),'Arabic PR evidence missing'
