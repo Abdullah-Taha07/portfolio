@@ -41,3 +41,23 @@
 .contact-details{gap:13px 24px}
 .contact-details>a{overflow-wrap:anywhere}
 @media(max-width:420px){.hero-contact-options{min-width:202px}.contact-actions .button{justify-content:center}.contact-details{flex-direction:column;align-items:flex-start}}
+
+
+/* v4: keyboard-accessible Mishwar app selector, shared by featured/project cards */
+.mishwar-chooser {position:relative;max-width:100%;color:var(--ink);font-family:Cairo,Inter,sans-serif}
+.mishwar-chooser summary {list-style:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:42px;padding:9px 15px;border:1px solid var(--accent);border-radius:10px;background:var(--accent);color:#06282c;font-weight:800;font-size:.8rem;line-height:1.5;cursor:pointer;user-select:none;transition:filter .2s ease,transform .2s ease}
+.mishwar-chooser summary::-webkit-details-marker{display:none}
+.mishwar-chooser summary::after{content:'⌄';font-size:1.15em;line-height:1;transition:transform .2s ease}
+.mishwar-chooser[open] summary::after{transform:rotate(180deg)}
+.mishwar-chooser summary:hover{filter:brightness(1.07)}
+.mishwar-chooser summary:focus-visible{outline:3px solid var(--accent2);outline-offset:3px}
+.mishwar-site-options{position:absolute;inset-inline-start:0;top:calc(100% + 7px);z-index:25;min-width:max(230px,100%);max-width:min(340px,85vw);display:flex;flex-direction:column;gap:5px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.mishwar-site-options a{display:block;min-height:43px;padding:9px 11px;border-radius:8px;text-decoration:none!important;color:var(--ink)!important;background:transparent!important;border:1px solid transparent!important;font-size:.82rem;line-height:1.6;font-weight:800}
+.mishwar-site-options a:hover,.mishwar-site-options a:focus-visible{background:var(--chip)!important;border-color:var(--accent)!important;transform:none!important;color:var(--ink)!important}
+.mishwar-chooser-flagship .mishwar-site-options{background:#102b3a;border-color:#408c91}
+.mishwar-chooser-flagship .mishwar-site-options a{color:#e5faff!important}
+.mishwar-chooser-flagship .mishwar-site-options a:hover,.mishwar-chooser-flagship .mishwar-site-options a:focus-visible{background:#215061!important;color:#fff!important}
+@media(max-width:670px){.mishwar-chooser .mishwar-site-options{min-width:min(265px,calc(100vw - 64px))}}
+/* Keep the featured choices fully visible instead of clipping them at the card edge. */
+.mishwar-chooser-flagship .mishwar-site-options{position:static;width:max-content;max-width:100%;margin-top:10px;box-shadow:none}
+.mishwar-chooser-card[open]{z-index:40}
