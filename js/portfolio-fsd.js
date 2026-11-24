@@ -49,7 +49,9 @@
   const setStored = (key, val) => { try { localStorage.setItem(key, val); } catch {} };
   const storedLang = getStored('at-portfolio-lang');
   const deviceLocale = String((navigator.languages && navigator.languages[0]) || navigator.language || 'ar').trim();
-  let lang = storedLang === 'ar' || storedLang === 'en' ? storedLang : (/^ar(?:[-_]|$)/i.test(deviceLocale) ? 'ar' : 'en');
+  const requestedLang = new URLSearchParams(location.search).get('lang');
+  let lang = requestedLang === 'ar' || requestedLang === 'en' ? requestedLang :
+    (storedLang === 'ar' || storedLang === 'en' ? storedLang : (/^ar(?:[-_]|$)/i.test(deviceLocale) ? 'ar' : 'en'));
   let theme = getStored('at-portfolio-theme') === 'light' ? 'light' : 'dark';
   let category = 'all';
   const byId = id => document.getElementById(id);
@@ -61,7 +63,9 @@
   const el = (tag, className, content) => { const node = document.createElement(tag); if(className) node.className = className; if(content !== undefined) node.textContent = content; return node; };
   const external = (url, text) => { const link = el('a', '', text); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; return link; };
 
+  let galleryEnhanced = false;
   function renderProjects(){
+    galleryEnhanced = true;
     const q = searchInput.value.trim().toLocaleLowerCase();
     const matches = items.filter(p => (category === 'all' || (category === 'training' ? (!p.live || p.kind === 'training') : p.kind === category && Boolean(p.live))) && (!q || [p.title,p.id,p.ar,p.en,...p.tags].join(' ').toLocaleLowerCase().includes(q)));
     const frag = document.createDocumentFragment();
@@ -118,14 +122,19 @@
   function applyLanguage(){
     root.lang = lang;
     root.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.querySelectorAll('[data-i18n]').forEach(node=>{ const k=node.getAttribute('data-i18n'); if(translations[lang][k] != null) node.textContent=translations[lang][k]; });
+    document.querySelectorAll('[data-i18n]').forEach(node=>{ const k=node.getAttribute('data-i18n'); const translated=translations[lang][k]; if(translated != null && node.textContent !== translated) node.textContent=translated; });
     document.querySelectorAll('[data-placeholder]').forEach(node=>{const k=node.getAttribute('data-placeholder');if(translations[lang][k])node.placeholder=translations[lang][k];});
     langToggle.textContent=lang === 'ar' ? 'EN' : 'عربي';
     langToggle.setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل إلى العربية');
     byId('menu-toggle').setAttribute('aria-label',lang==='ar'?'فتح القائمة':'Open menu');
     backToTop.setAttribute('aria-label', translations[lang].backToTop);
     backToTop.title = translations[lang].backToTop;
-    renderProjects();
+    if (galleryEnhanced || lang !== 'ar' || projectGrid.querySelectorAll('.project-card').length !== 15) {
+      renderProjects();
+    } else {
+      byId('repo-count').textContent = '15';
+      byId('no-projects').hidden = true;
+    }
   }
   function applyTheme(){
     root.dataset.theme=theme;
@@ -171,6 +180,17 @@
     window.scrollTo({top: 0, left: 0, behavior: 'instant'});
   });
   byId('current-year').textContent=String(new Date().getFullYear());
+  // Build the rich interactive gallery near the projects section, not during first paint.
+  if ('IntersectionObserver' in window) {
+    const galleryObserver = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      if (!galleryEnhanced) renderProjects();
+      galleryObserver.disconnect();
+    }, {rootMargin:'280px 0px'});
+    galleryObserver.observe(projectGrid);
+  } else {
+    window.addEventListener('load', () => { if (!galleryEnhanced) renderProjects(); }, {once:true});
+  }
   applyLanguage();applyTheme();
   updateBackToTop();
 })();

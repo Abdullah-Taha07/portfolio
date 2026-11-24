@@ -3,6 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Locale routing happens before first paint: English uses the static English landing page. */
+(() => {
+  if (!/^https?:$/.test(location.protocol)) return;
+  let saved = null;
+  try { saved = localStorage.getItem('at-portfolio-lang'); } catch (_) {}
+  const requested = new URLSearchParams(location.search).get('lang');
+  const device = String((navigator.languages && navigator.languages[0]) || navigator.language || 'ar');
+  const choice = requested === 'ar' || requested === 'en' ? requested :
+    saved === 'ar' || saved === 'en' ? saved : /^ar(?:[-_]|$)/i.test(device) ? 'ar' : 'en';
+  if (choice === 'en') {
+    const target = new URL('en/', location.href);
+    target.search = location.search;
+    target.hash = location.hash;
+    location.replace(target.href);
+  }
+})();
+</script>
   <meta name="theme-color" content="#0b1220">
   <meta name="description" content="عبدالله طه محمد — مطور Full-Stack في الرياض. مشاريع عملية في JavaScript، Node.js، Cloudflare Workers، D1، R2 وواجهات الويب. معرض أعمال مشوار وتطبيقات الويب.">
   <meta name="author" content="Abdalla Taha Mohamed">
@@ -33,7 +51,7 @@
   <link rel="apple-touch-icon" href="images/abdalla-avatar-icon-v1.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=optional" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=optional" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/portfolio-fsd.css">
   <script defer src="js/portfolio-fsd.js"></script>
   <script type="application/ld+json">
